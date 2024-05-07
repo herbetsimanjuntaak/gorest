@@ -39,23 +39,19 @@ public class Models {
     }
 
     public static Response hitUpdate(String endpoint ) {
-        setUpHeaders();
-
-//        requestSpecification.when().get(endpoint);
-//        System.out.println("Endpoint yang dilempar : " + endpoint);
 
         String name = generateName()+" Edit";
-        String email = generateRandomEmail();
+        String email = generateEmails();
         String status = "active";
         String gender = "male";
-        System.out.println(email);
+
 
         JSONObject payload = new JSONObject();
         payload.put("name", name);
         payload.put("email", email);
         payload.put("status", status);
         payload.put("gender", gender);
-
+        setUpHeaders();
         return requestSpecification.body(payload.toString()).when().put(endpoint);
     }
 
@@ -68,7 +64,7 @@ public class Models {
     public static Response createNewUser(String endpoint) {
         String name = generateName();
         String gender = "female";
-        String email = generateRandomEmail(); //karena email tidak boleh sama/ email yang udah dipakai tidak boleh dipakai lagi  maka buat function dlu di class utility
+        String email = generateEmails();
         System.out.println(email);
         String status = "active";
 
@@ -85,7 +81,7 @@ public class Models {
     public static Response createNameBlank(String endpoint) {
         String name = "";
         String gender = "male";
-        String email = generateRandomEmail();
+        String email = generateEmails();
         String status = "active";
 
         JSONObject payload = new JSONObject();
@@ -99,9 +95,9 @@ public class Models {
     }
 
     public static Response createGenderBlank(String endpoint) {
-        String name = generateRandomName();
+        String name = generateName();
         String gender = "";
-        String email = generateRandomEmail(); //karena email tidak boleh sama/ email yang udah dipakai tidak boleh dipakai lagi  maka buat function dlu di class utility
+        String email = generateEmails();
         String status = "active";
 
         JSONObject payload = new JSONObject();
@@ -115,9 +111,9 @@ public class Models {
     }
 
     public static Response hitAPICreateNewUserGenderNotFemale(String endpoint) {
-        String name = generateRandomName();
+        String name = generateName();
         String gender = "pria";
-        String email = generateRandomEmail(); //karena email tidak boleh sama/ email yang udah dipakai tidak boleh dipakai lagi  maka buat function dlu di class utility
+        String email = generateEmails();
         String status = "active";
 
         JSONObject payload = new JSONObject();
@@ -131,10 +127,10 @@ public class Models {
     }
 
     public static Response createStatusBlank(String endpoint) {
-        String name = generateRandomName();
+        String name = generateName();
         String gender = "male";
-        String email = generateRandomEmail();
-        String status = "status";
+        String email = generateEmails();
+        String status = "";
 
         JSONObject payload = new JSONObject();
         payload.put("name", name);
@@ -147,7 +143,7 @@ public class Models {
     }
 
     public static Response createEmailBlank(String endpoint) {
-        String name = generateRandomName();
+        String name = generateName();
         String gender = "male";
         String email = "";
         String status = "status";
@@ -181,7 +177,7 @@ public class Models {
     public static Response createNewUserOver(String endpoint) {
         String name = "sdfasSDFASFdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSDFASFdfdfasSSFdfdfasSDFASFdfdf";
         String gender = "male";
-        String email = generateRandomEmail();
+        String email = generateEmails();
         System.out.println(email);
         String status = "active";
 

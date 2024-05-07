@@ -129,7 +129,7 @@ public class ApiStep {
     }
 
 
-    @And("hit get API update user by id")
+    @And("hit API update user by id")
     public void hitGetAPIUpdateUserById() {
         apiPage.hitGetAPIUpdateUserById();
     }
@@ -150,5 +150,10 @@ public class ApiStep {
     @Then("validation response body create over character")
     public void validationResponseBodyCreateOverCharacter() {
         apiPage.ResponseBodyCreateOverCharacter();
+    }
+
+    @And("validation response body message")
+    public void validationResponseBodyMessage() {
+        apiPage.validationUpdate();
     }
 }

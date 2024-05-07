@@ -56,7 +56,7 @@ public class ApiPage {
 
     public void validationStatusCodeIsEquals(int statusCode) {
         assertThat(response.statusCode()).isEqualTo(statusCode);
-        System.out.println(response.statusCode());
+
     }
 
     public void validationResponseBodyGetListUsers() {
@@ -67,25 +67,17 @@ public class ApiPage {
         List<Object> gender = response.jsonPath().getList("gender");
         List<Object> status = response.jsonPath().getList("status");
 
-        assertThat(id).isNotNull();
-        assertThat(name).isNotNull();
-        assertThat(email).isNotNull();
-        assertThat(gender).isNotNull();
-        assertThat(status).isNotNull();
-
-        /*
         assertThat(id.get(0)).isNotNull();
         assertThat(name.get(0)).isNotNull();
         assertThat(email.get(0)).isNotNull();
         assertThat(gender.get(0)).isIn("female", "male");
         assertThat(status.get(0)).isIn("active", "inactive");
-         */
+
 
     }
 
     public void validationResponseJsonWithJSONSchema(String fileName) {
         File JSONFile = getJSONSchemaFile(fileName);
-        System.out.println(response.getBody().asString());
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(JSONFile));
     }
 
@@ -111,7 +103,6 @@ public class ApiPage {
         assertThat(gender).isIn("female", "male");
         assertThat(status).isIn("active", "inactive");
 
-        System.out.println("name =" + name);
 
     }
 
@@ -130,9 +121,6 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("name");
         assertThat(message).isEqualTo("can't be blank");
 
-        System.out.println(fieldName);
-
-
 
     }
 
@@ -150,7 +138,7 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("gender");
         assertThat(message).isEqualTo("can't be blank, can be male of female");
 
-        System.out.println(fieldName);
+
     }
 
     public void hitAPICreateNewUserStatusBlank() {
@@ -167,7 +155,7 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("status");
         assertThat(message).isEqualTo("can't be blank");
 
-        System.out.println(fieldName);
+
     }
 
 
@@ -185,7 +173,7 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("email");
         assertThat(message).isEqualTo("can't be blank");
 
-        System.out.println(fieldName);
+
     }
 
     public void hitAPICreateNewUserInvalidEmail() {
@@ -204,7 +192,7 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("email");
         assertThat(message).isEqualTo("is invalid");
 
-        System.out.println(fieldName);
+
     }
 
     public void prepareValidId(int arg0) {
@@ -213,8 +201,6 @@ public class ApiPage {
 
     public void hitAPIGetUsersById() {
         response = hitUserById(finalEndpoint);
-        System.out.println(response.getBody().asString());
-
     }
 
     public void validationResponseBodyGetUserById() {
@@ -247,25 +233,15 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("gender");
         assertThat(message).isEqualTo("can't be blank, can be male of female");
 
-        System.out.println(fieldName);
+
     }
 
     public void hitGetAPIUpdateUserById() {
-        System.out.println("before di hit");
-        System.out.println(response.getBody().asString());
         response = hitUpdate(finalEndpoint);
-        System.out.println(" after di hit");
-        System.out.println(response.getBody().asString());
-
     }
 
     public void hitGetAPIDeleteUserById() {
-        System.out.println("before di hit");
-        System.out.println(response.getBody().asString());
         response = deleteUserById(finalEndpoint);
-        System.out.println("after di hit");
-        System.out.println(response.getBody().asString());
-
     }
 
     public void hitAPICreateNewUserOverCharacter() {
@@ -282,6 +258,14 @@ public class ApiPage {
         assertThat(fieldName).isEqualTo("name");
         assertThat(message).isEqualTo("is too long (maximum is 200 characters)");
 
+
+    }
+
+    public void validationUpdate() {
+
+        JsonPath jsonPathEvaluator = response.jsonPath();
+        String message = jsonPathEvaluator.getString("message");
+        assertThat(message).isEqualTo("Resource not found");
 
     }
 
